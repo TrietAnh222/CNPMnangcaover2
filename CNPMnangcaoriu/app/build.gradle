@@ -4,12 +4,12 @@ plugins {
 apply plugin: "realm-android"
 android {
     namespace 'com.example.cnpmnangcaoriu'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.cnpmnangcaoriu"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
