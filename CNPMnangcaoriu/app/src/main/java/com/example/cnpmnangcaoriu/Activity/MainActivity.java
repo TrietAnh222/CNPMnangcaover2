@@ -1,7 +1,9 @@
 package com.example.cnpmnangcaoriu.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,10 +12,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +28,10 @@ import com.example.cnpmnangcaoriu.APIservices;
 import com.example.cnpmnangcaoriu.Adapter.ProductAdapter;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
+import com.example.cnpmnangcaoriu.fragment.CategoryFragment;
+import com.example.cnpmnangcaoriu.fragment.HistoryFragment;
+import com.example.cnpmnangcaoriu.fragment.HomeFragment;
+import com.example.cnpmnangcaoriu.fragment.OtherFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -33,7 +42,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -41,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewmanhinhchinh;
     DrawerLayout drawerLayout;
+
+    private static final int FRAGMENT_HOME = 0;
+    private static final int FRAGMENT_CATEGORY = 1;
+    private static final int FRAGMENT_HISTORY = 2;
+    private static final int FRAGMENT_OTHER = 3;
+    private int mCurrentFragment = FRAGMENT_HOME;
+    private DrawerLayout mdrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +124,51 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.Toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.ViewFlipper);
         recyclerViewManHinhChinh = findViewById(R.id.RecyclerView);
-        navigationView = findViewById(R.id.navigationview);
-        listViewmanhinhchinh = findViewById(R.id.listviewmanhinhchinh);
+//        navigationView = findViewById(R.id.navigationview);
+//        listViewmanhinhchinh = findViewById(R.id.listviewmanhinhchinh);
+         navigationView = findViewById(R.id.navigation_view);
+         navigationView.setNavigationItemSelectedListener(this);
+
+
         drawerLayout = findViewById(R.id.drawerLayout);
         recyclerViewManHinhChinh.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id==R.id.nav_home) {
+            if (mCurrentFragment != FRAGMENT_HOME) {
+                replaceFragment(new HomeFragment());
+                mCurrentFragment = FRAGMENT_HOME;
+            }
+        } else if (id==R.id.nav_category) {
+            if (mCurrentFragment != FRAGMENT_CATEGORY) {
+                replaceFragment(new CategoryFragment());
+                mCurrentFragment = FRAGMENT_CATEGORY;
+            }
+        } else if (id==R.id.nav_history) {
+            if (mCurrentFragment != FRAGMENT_HISTORY) {
+                replaceFragment(new HistoryFragment());
+                mCurrentFragment = FRAGMENT_HISTORY;
+            }
+        } else if (id==R.id.nav_other) {
+            if (mCurrentFragment != FRAGMENT_OTHER) {
+                replaceFragment(new OtherFragment());
+                mCurrentFragment = FRAGMENT_OTHER;
+            }
+        } else if (id==R.id.nav_login) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        mdrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.RecyclerView,fragment);
+        transaction.commit();
     }
 }
