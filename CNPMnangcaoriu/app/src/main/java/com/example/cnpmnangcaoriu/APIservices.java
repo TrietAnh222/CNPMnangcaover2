@@ -14,9 +14,9 @@ public interface APIservices {
     Gson gson =new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
     //goi retrofit
     //lưu ý tìm ip wifi của chính mình r gắn đuôi localhost vô mới chạy được nhen
-    //vd: http://192.168.1.103:đuôi localhost
+    //vd: http://192.168.1.103:đuôi localhost http://192.168.1.12:3000/
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.21.21.170:3001").addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://192.168.1.3:3001/").addConverterFactory(GsonConverterFactory.create())
             .build();
     // Khởi tạo Retrofit Service
     APIservices myapi= retrofit.create(APIservices.class);
