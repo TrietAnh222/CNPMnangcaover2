@@ -128,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        listViewmanhinhchinh = findViewById(R.id.listviewmanhinhchinh);
          navigationView = findViewById(R.id.navigation_view);
          navigationView.setNavigationItemSelectedListener(this);
-
-
         drawerLayout = findViewById(R.id.drawerLayout);
         recyclerViewManHinhChinh.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
