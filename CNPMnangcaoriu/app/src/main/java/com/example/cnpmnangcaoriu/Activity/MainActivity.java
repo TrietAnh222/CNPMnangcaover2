@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewFlipper viewFlipper;
     RecyclerView recyclerViewManHinhChinh;
     NavigationView navigationView;
-    ListView listViewmanhinhchinh;
     DrawerLayout drawerLayout;
 
     private static final int FRAGMENT_HOME = 0;
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "call fail", Toast.LENGTH_SHORT).show();
             }
         });
-
         KhaiBao();
         ActionBar();
         ActionViewFilpper();
@@ -160,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             finish();
         }
-        mdrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

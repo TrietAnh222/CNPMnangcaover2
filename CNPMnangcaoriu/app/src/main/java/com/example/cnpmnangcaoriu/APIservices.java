@@ -12,6 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface APIservices {
     Gson gson =new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
@@ -25,5 +26,6 @@ public interface APIservices {
     APIservices myapi= retrofit.create(APIservices.class);
     @GET("/api/product/get-all")
     Call<ProductModel> Getdata();
+    @POST("/api/user/sign-in")
     Call<LogInResponse> login(@Body LoginRequest loginRequest);
 }

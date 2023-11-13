@@ -58,13 +58,19 @@ public class LoginActivity extends AppCompatActivity {
                 logincall.enqueue(new Callback<LogInResponse>() {
                     @Override
                     public void onResponse(Call<LogInResponse> call, Response<LogInResponse> response) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        LogInResponse logInResponse = response.body();
+                        if(response.isSuccessful()&& "OK".equals(logInResponse.getStatus()))
+                        {
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                            Toast.makeText(LoginActivity.this, logInResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<LogInResponse> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Email hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
