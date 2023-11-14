@@ -4,6 +4,8 @@ package com.example.cnpmnangcaoriu;
 import com.example.cnpmnangcaoriu.Models.LogInResponse;
 import com.example.cnpmnangcaoriu.Models.LoginRequest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
+import com.example.cnpmnangcaoriu.Models.RegisterRequest;
+import com.example.cnpmnangcaoriu.Models.ResigterResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,4 +30,6 @@ public interface APIservices {
     Call<ProductModel> Getdata();
     @POST("/api/user/sign-in")
     Call<LogInResponse> login(@Body LoginRequest loginRequest);
+    @POST("/api/user/sign-up")
+    Call<ResigterResponse> register (@Body RegisterRequest registerRequest);
 }

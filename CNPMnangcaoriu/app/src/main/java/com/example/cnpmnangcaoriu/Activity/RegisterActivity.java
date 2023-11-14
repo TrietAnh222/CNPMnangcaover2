@@ -13,7 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cnpmnangcaoriu.APIservices;
+import com.example.cnpmnangcaoriu.Models.RegisterRequest;
+import com.example.cnpmnangcaoriu.Models.ResigterResponse;
 import com.example.cnpmnangcaoriu.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private ImageView imgRegister;
@@ -26,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         initUi();
         initListener();
     }
@@ -58,8 +64,29 @@ public class RegisterActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(emailValue) || TextUtils.isEmpty(password) ||  TextUtils.isEmpty(repasswordValue)) {
                     Toast.makeText(getApplicationContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    RegisterRequest registerRequest = new RegisterRequest(emailValue,password,repasswordValue);
+                    Call<ResigterResponse> responseCall = APIservices.myapi.register(registerRequest);
+                    responseCall.enqueue(new Callback<ResigterResponse>() {
+                        @Override
+                        public void onResponse(Call<ResigterResponse> call, Response<ResigterResponse> response) {
+                            ResigterResponse resigterResponse = response.body();
+                            if (response.isSuccessful()&& "OK".equals(resigterResponse.getStatus())){
+                                Toast.makeText(RegisterActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(RegisterActivity.this, resigterResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResigterResponse> call, Throwable t) {
+
+                        }
+                    });
+                    /*Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);*/
                 }
             }
         });
