@@ -10,44 +10,80 @@
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/Toolbarmanhinhchinh"
-            app:title="Trang Chinh"
-            app:titleTextColor="@color/white"
-            android:background="#FF0000"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-        </androidx.appcompat.widget.Toolbar>
-        <ViewFlipper
-            android:id="@+id/ViewFlipper"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-        </ViewFlipper>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:text="sản phẩm mới nhất"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textAlignment="center"
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/Toolbarmanhinhchinh"
+                app:title="Trang Chinh"
+                app:titleTextColor="@color/white"
                 android:background="#FF0000"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecyclerView"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_height="?attr/actionBarSize">
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextText"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/baseline_search_24"
+                    android:ems="10"
+                    android:hint="Tìm kiếm"
+                    android:inputType="text"
+                    tools:layout_marginBottom="8dp"
+                    tools:layout_marginEnd="10dp"
+                    tools:layout_marginStart="30dp" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/baseline_search_24"
+                    tools:layout_marginStart="2dp" />
+
+            </LinearLayout>
+
+            <ViewFlipper
+                android:id="@+id/ViewFlipper"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"></ViewFlipper>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#FF0000"
+                    android:text="Sản phẩm nổi bật"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecyclerView"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
@@ -57,16 +93,16 @@
             app:headerLayout="@layout/layout_header_nav"
             app:menu="@menu/menu_nav"/>
 
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/navigationview"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--        <ListView-->
-<!--            android:id="@+id/listviewmanhinhchinh"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"></ListView>-->
+        <!--    <com.google.android.material.navigation.NavigationView-->
+        <!--        android:id="@+id/navigationview"-->
+        <!--        android:layout_gravity="start"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent">-->
+        <!--        <ListView-->
+        <!--            android:id="@+id/listviewmanhinhchinh"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"></ListView>-->
 
-<!--    </com.google.android.material.navigation.NavigationView>-->
-</androidx.drawerlayout.widget.DrawerLayout>
+        <!--    </com.google.android.material.navigation.NavigationView>-->
+    </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
