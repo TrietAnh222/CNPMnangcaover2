@@ -20,7 +20,7 @@ public class ProductModel {
         this.data = data;
     }
 
-    public class Product {
+   public class Product {
         @SerializedName("_id")
         private String id;
     

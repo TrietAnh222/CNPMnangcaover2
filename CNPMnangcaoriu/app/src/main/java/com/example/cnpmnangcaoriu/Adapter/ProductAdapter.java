@@ -2,6 +2,7 @@ package com.example.cnpmnangcaoriu.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cnpmnangcaoriu.Activity.ChitietsanphamActivity;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
 
@@ -40,7 +42,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         //glide
         Glide.with(context).load(product.getImage()).into(holder.imageView);
 
-
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return productList.getData().size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView priceTextView;
         ImageView imageView;
@@ -57,6 +58,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             nameTextView = itemView.findViewById(R.id.productName);
             priceTextView = itemView.findViewById(R.id.productPrice);
             imageView = itemView.findViewById(R.id.productImage);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProductModel.Product product = productList.getData().get(getAdapterPosition());
+                    Intent intent = new Intent(view.getContext(), ChitietsanphamActivity.class);
+                    intent.putExtra("id",product.getId());
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
