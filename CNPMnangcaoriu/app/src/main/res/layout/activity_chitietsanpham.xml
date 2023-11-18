@@ -139,7 +139,7 @@
         android:layout_width="307dp"
         android:layout_height="60dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#E81D1D"
         android:drawableLeft="@drawable/baseline_add_shopping_cart_24"
         android:drawableTint="@color/white"
