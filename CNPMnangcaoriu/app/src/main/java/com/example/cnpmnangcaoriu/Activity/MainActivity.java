@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //chi tiết về glide Ae có thể tham khảo ở đây
     //https://github.com/bumptech/glide/blob/master/README.md
     //xài anim để có hiệu ứng chút nhá
+
     private void ActionViewFilpper(){
         List<String> mangquangcao = new ArrayList<>();
         mangquangcao.add("https://intphcm.com/data/upload/banner-la-gi.jpg");
@@ -157,7 +157,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+            //call giỏ hàng bị fail
+        } else if (id == R.id.btnGioHang) {
+            // Mở GioHangActivity khi nhấn vào "Giỏ hàng"
+            Intent gioHangIntent = new Intent(MainActivity.this, GioHangActivity.class);
+            startActivity(gioHangIntent);
         }
+
+
         return true;
     }
 
@@ -166,4 +173,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.replace(R.id.RecyclerView,fragment);
         transaction.commit();
     }
+
 }
