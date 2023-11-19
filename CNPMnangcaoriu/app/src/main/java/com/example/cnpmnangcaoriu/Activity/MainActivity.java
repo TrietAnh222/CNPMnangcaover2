@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 
 import com.example.cnpmnangcaoriu.APIservices;
 import com.example.cnpmnangcaoriu.Adapter.ProductAdapter;
+import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
 import com.example.cnpmnangcaoriu.fragment.CategoryFragment;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView recyclerViewManHinhChinh;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
+    public static List<DetailTest.ProductDetail> giohang;
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_CATEGORY = 1;
@@ -128,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          navigationView.setNavigationItemSelectedListener(this);
         drawerLayout = findViewById(R.id.drawerLayout);
         recyclerViewManHinhChinh.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        if(giohang==null){
+            giohang = new ArrayList<>();
+        }
     }
 
     @Override

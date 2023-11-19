@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.cnpmnangcaoriu.Activity.ChitietsanphamActivity;
 import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
@@ -22,10 +23,10 @@ import com.example.cnpmnangcaoriu.R;
 import java.util.List;
 
 public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
-  public List<DetailTest> Cartlist;
+  public List<DetailTest.ProductDetail> Cartlist;
   public Context context;
 
-    public Cartadapter(List<DetailTest> cartlist, Context context) {
+    public Cartadapter(List<DetailTest.ProductDetail> cartlist, Context context) {
         Cartlist = cartlist;
         this.context = context;
     }
@@ -43,9 +44,10 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             Toast.makeText(context, "Thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         }
         else {
-            DetailTest.ProductDetail detail = Cartlist.get(position).getDetail();
+            DetailTest.ProductDetail detail = Cartlist.get(position);
             holder.TXTname.setText(detail.getName());
             holder.TXTprice.setText(detail.getPrice().toString());
+            Glide.with(context).load(detail.getImage()).into(holder.imageView);
         }
     }
 

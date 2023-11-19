@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.cnpmnangcaoriu.APIservices;
+import com.example.cnpmnangcaoriu.Adapter.Cartadapter;
 import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.R;
 
@@ -95,9 +96,26 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTN_giohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentdetail = new Intent(ChitietsanphamActivity.this , MainActivity.class);
-                intentdetail.putExtra("id" , id);
-                startActivity(intentdetail);
+                Call<DetailTest> call = APIservices.myapi.getDetails(id);
+                call.enqueue(new Callback<DetailTest>() {
+                    @Override
+                    public void onResponse(Call<DetailTest> call, Response<DetailTest> response) {
+                        if(response.isSuccessful()){
+                            detailTest = response.body();
+                            MainActivity.giohang.add(detailTest.getDetail());
+                            //phần sau làm tiếp
+                            Intent intentdetail = new Intent(ChitietsanphamActivity.this , MainActivity.class);
+                            intentdetail.putExtra("id" , id);
+                            startActivity(intentdetail);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DetailTest> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
     }
