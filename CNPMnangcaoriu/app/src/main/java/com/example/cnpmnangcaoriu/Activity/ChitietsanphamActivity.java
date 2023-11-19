@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,10 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChitietsanphamActivity extends AppCompatActivity {
+    DetailTest detailTest;
     private String id;
-    TextView detail_name,Rating,detail_description,detail_price;
+    TextView detail_name,Rating,detail_description,detail_price,detail_quantity;
     Button BTN_giohang,BTN_muangay;
-    ImageView imgviewchitiet;
+    ImageView imgviewchitiet,BTNtang,BTNgiam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DetailTest> call, Response<DetailTest> response) {
                 if(response.isSuccessful()){
-                    DetailTest detailTest = response.body();
+                    detailTest = response.body();
                     detail_name.setText(detailTest.getDetail().getName());
                     detail_description.setText(detailTest.getDetail().getDescription());
                     detail_price.setText(detailTest.getDetail().getPrice().toString());
@@ -53,6 +55,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
             }
         });
         KhaiBao();
+        XulyButton();
     }
 
     private void KhaiBao(){
@@ -63,5 +66,39 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTN_giohang = findViewById(R.id.add_to_cart);
         BTN_muangay = findViewById(R.id.buy_now);
         imgviewchitiet = findViewById(R.id.imageViewChiTiet);
+        BTNtang = findViewById(R.id.addItem);
+        BTNgiam = findViewById(R.id.removeItem);
+        detail_quantity = findViewById(R.id.quantity);
+    }
+    //xử lý button
+    private void XulyButton(){
+        BTNtang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(detail_quantity.getText().toString());
+                if(quantity<detailTest.getDetail().getCountInStock().intValue()) {
+                    quantity = quantity + 1;
+                    detail_quantity.setText(String.valueOf(quantity));
+                }
+            }
+        });
+        BTNgiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(detail_quantity.getText().toString());
+                if(quantity>1) {
+                    quantity = quantity - 1;
+                    detail_quantity.setText(String.valueOf(quantity));
+                }
+            }
+        });
+        BTN_giohang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentdetail = new Intent(ChitietsanphamActivity.this , MainActivity.class);
+                intentdetail.putExtra("id" , id);
+                startActivity(intentdetail);
+            }
+        });
     }
 }

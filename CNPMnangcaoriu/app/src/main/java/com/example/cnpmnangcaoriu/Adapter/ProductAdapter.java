@@ -41,7 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.priceTextView.setText(String.valueOf(product.getPrice()));
         //glide
         Glide.with(context).load(product.getImage()).into(holder.imageView);
-
     }
 
     @Override

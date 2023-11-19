@@ -7,6 +7,8 @@ import java.util.List;
 public class ProductModel {
     @SerializedName("data")
     private List<Product> data;
+    public ProductModel() {
+    }
 
     public ProductModel(List<Product> data) {
         this.data = data;
