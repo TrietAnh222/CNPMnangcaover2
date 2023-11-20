@@ -5,6 +5,24 @@ import com.google.gson.annotations.SerializedName;
 public class DetailTest {
     @SerializedName("data")
     private ProductDetail detail;
+    private boolean ischecked;
+    private int soluong;
+
+    public boolean Ischecked() {
+        return ischecked;
+    }
+
+    public void setIschecked(boolean ischecked) {
+        this.ischecked = ischecked;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
 
     public ProductDetail getDetail() {
         return detail;

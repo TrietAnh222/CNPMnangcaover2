@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView recyclerViewManHinhChinh;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
-    public static List<DetailTest> giohang;
+    public static ArrayList<DetailTest> giohang;
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_CATEGORY = 1;

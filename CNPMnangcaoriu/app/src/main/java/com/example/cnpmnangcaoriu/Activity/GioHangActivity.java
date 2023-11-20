@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cnpmnangcaoriu.APIservices;
 import com.example.cnpmnangcaoriu.Adapter.Cartadapter;
+import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
 
@@ -24,7 +25,8 @@ import retrofit2.Response;
 public class GioHangActivity extends AppCompatActivity {
     RecyclerView rcbill;
     TextView txttongcong;
-    public Cartadapter cartadapter;
+    Cartadapter cartadapter;
+    int giatritongcong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class GioHangActivity extends AppCompatActivity {
         cartadapter = new Cartadapter(MainActivity.giohang,GioHangActivity.this);
         rcbill.setAdapter(cartadapter);
         txttongcong = findViewById(R.id.txt_amount);
-        txttongcong.setText(String.valueOf(cartadapter.GiatriTongcong));
+        for(DetailTest detailTest:MainActivity.giohang){
+            giatritongcong += detailTest.getDetail().getPrice().intValue() * ChitietsanphamActivity.quantity;
+        }
+        txttongcong.setText(String.valueOf(giatritongcong));
     }
 }

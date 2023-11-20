@@ -23,15 +23,16 @@ import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
-  private List<DetailTest> Cartlist;
+  private ArrayList<DetailTest> Cartlist;
   private Context context;
-  public int GiatriTongcong=0;
-    public Cartadapter(List<DetailTest> cartlist, Context context) {
+
+    public Cartadapter(ArrayList<DetailTest> cartlist, Context context) {
         Cartlist = cartlist;
         this.context = context;
     }
