@@ -36,5 +36,6 @@ public class GioHangActivity extends AppCompatActivity {
         rcbill = findViewById(R.id.rcvBill);
         rcbill.setLayoutManager(new LinearLayoutManager(GioHangActivity.this));
         cartadapter = new Cartadapter(MainActivity.giohang,GioHangActivity.this);
+        rcbill.setAdapter(cartadapter);
     }
 }

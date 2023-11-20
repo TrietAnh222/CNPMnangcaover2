@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +24,14 @@ import com.example.cnpmnangcaoriu.R;
 import java.util.List;
 
 public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
-  public List<DetailTest.ProductDetail> Cartlist;
-  public Context context;
+  private List<DetailTest> Cartlist;
+  private Context context;
 
-    public Cartadapter(List<DetailTest.ProductDetail> cartlist, Context context) {
+
+    public Cartadapter(List<DetailTest> cartlist, Context context) {
         Cartlist = cartlist;
         this.context = context;
     }
-
     @NonNull
     @Override
     public Cartadapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,10 +45,11 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             Toast.makeText(context, "Thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         }
         else {
-            DetailTest.ProductDetail detail = Cartlist.get(position);
+            DetailTest.ProductDetail detail = Cartlist.get(position).getDetail();
             holder.TXTname.setText(detail.getName());
             holder.TXTprice.setText(detail.getPrice().toString());
             Glide.with(context).load(detail.getImage()).into(holder.imageView);
+            holder.TXTsoluong.setText(String.valueOf(ChitietsanphamActivity.quantity));
         }
     }
 
@@ -57,7 +59,7 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView TXTname,TXTprice,TXTsoluong;
-        Button BTNtang,BTNgiam;
+        ImageButton BTNtang,BTNgiam;
         ImageView imageView;
         CheckBox checkBox;
         public ViewHolder(View itemView) {
@@ -69,6 +71,7 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             BTNtang = itemView.findViewById(R.id.btn_increase);
             imageView = itemView.findViewById(R.id.hinhanh);
             checkBox = itemView.findViewById(R.id.checkBox);
+
         }
     }
 }

@@ -25,6 +25,7 @@ import retrofit2.Response;
 public class ChitietsanphamActivity extends AppCompatActivity {
     DetailTest detailTest;
     private String id;
+    public static int quantity;
     TextView detail_name,Rating,detail_description,detail_price,detail_quantity;
     Button BTN_giohang,BTN_muangay;
     ImageView imgviewchitiet,BTNtang,BTNgiam;
@@ -76,7 +77,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTNtang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = Integer.parseInt(detail_quantity.getText().toString());
+                quantity = Integer.parseInt(detail_quantity.getText().toString());
                 if(quantity<detailTest.getDetail().getCountInStock().intValue()) {
                     quantity = quantity + 1;
                     detail_quantity.setText(String.valueOf(quantity));
@@ -86,7 +87,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTNgiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = Integer.parseInt(detail_quantity.getText().toString());
+                quantity = Integer.parseInt(detail_quantity.getText().toString());
                 if(quantity>1) {
                     quantity = quantity - 1;
                     detail_quantity.setText(String.valueOf(quantity));
@@ -102,10 +103,11 @@ public class ChitietsanphamActivity extends AppCompatActivity {
                     public void onResponse(Call<DetailTest> call, Response<DetailTest> response) {
                         if(response.isSuccessful()){
                             detailTest = response.body();
-                            MainActivity.giohang.add(detailTest.getDetail());
+                            MainActivity.giohang.add(detailTest);
+                            quantity = 1;
                             //phần sau làm tiếp
                             Intent intentdetail = new Intent(ChitietsanphamActivity.this , MainActivity.class);
-                            intentdetail.putExtra("id" , id);
+                            intentdetail.putExtra("quantity" , detail_quantity.getText());
                             startActivity(intentdetail);
                         }
                     }
