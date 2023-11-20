@@ -3,6 +3,7 @@ package com.example.cnpmnangcaoriu.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 
 public class GioHangActivity extends AppCompatActivity {
     RecyclerView rcbill;
+    TextView txttongcong;
     public Cartadapter cartadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +39,7 @@ public class GioHangActivity extends AppCompatActivity {
         rcbill.setLayoutManager(new LinearLayoutManager(GioHangActivity.this));
         cartadapter = new Cartadapter(MainActivity.giohang,GioHangActivity.this);
         rcbill.setAdapter(cartadapter);
+        txttongcong = findViewById(R.id.txt_amount);
+        txttongcong.setText(String.valueOf(cartadapter.GiatriTongcong));
     }
 }

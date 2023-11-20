@@ -66,7 +66,6 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         detail_description = findViewById(R.id.detail_description);
         detail_price = findViewById(R.id.detail_price);
         BTN_giohang = findViewById(R.id.add_to_cart);
-        BTN_muangay = findViewById(R.id.buy_now);
         imgviewchitiet = findViewById(R.id.imageViewChiTiet);
         BTNtang = findViewById(R.id.addItem);
         BTNgiam = findViewById(R.id.removeItem);

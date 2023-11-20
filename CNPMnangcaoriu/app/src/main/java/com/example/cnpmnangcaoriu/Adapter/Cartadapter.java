@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.WindowDecorActionBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,13 +23,14 @@ import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
   private List<DetailTest> Cartlist;
   private Context context;
-
-
+  public int GiatriTongcong=0;
     public Cartadapter(List<DetailTest> cartlist, Context context) {
         Cartlist = cartlist;
         this.context = context;
@@ -44,17 +47,42 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
         if(Cartlist==null){
             Toast.makeText(context, "Thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else
+        {
             DetailTest.ProductDetail detail = Cartlist.get(position).getDetail();
             holder.TXTname.setText(detail.getName());
             holder.TXTprice.setText(detail.getPrice().toString());
             Glide.with(context).load(detail.getImage()).into(holder.imageView);
             holder.TXTsoluong.setText(String.valueOf(ChitietsanphamActivity.quantity));
+            holder.BTNtang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int soluong = Integer.parseInt(holder.TXTsoluong.getText().toString());
+                    if (soluong < detail.getCountInStock().intValue()) {
+                        soluong = soluong + 1;
+                        holder.TXTsoluong.setText(String.valueOf(soluong));
+                    }
+                }
+            });
+            holder.BTNgiam.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int soluong = Integer.parseInt(holder.TXTsoluong.getText().toString());
+                    if (soluong > 1) {
+                        soluong = soluong - 1;
+                        holder.TXTsoluong.setText(String.valueOf(soluong));
+                    }
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
+        if(Cartlist==null){
+            return 0;
+        }
+        else
         return Cartlist.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -71,7 +99,10 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             BTNtang = itemView.findViewById(R.id.btn_increase);
             imageView = itemView.findViewById(R.id.hinhanh);
             checkBox = itemView.findViewById(R.id.checkBox);
-
+            itemView.setOnClickListener(view -> {
+                checkBox.setChecked(!checkBox.isChecked());
+            });
         }
     }
+
 }
