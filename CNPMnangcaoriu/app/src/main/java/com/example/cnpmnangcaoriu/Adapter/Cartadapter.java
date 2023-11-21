@@ -19,9 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cnpmnangcaoriu.Activity.ChitietsanphamActivity;
+import com.example.cnpmnangcaoriu.IImageclicklistener;
 import com.example.cnpmnangcaoriu.Models.DetailTest;
+import com.example.cnpmnangcaoriu.Models.Eventbus.TinhTongevent;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,24 +59,22 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             holder.TXTprice.setText(detail.getPrice().toString());
             Glide.with(context).load(detail.getImage()).into(holder.imageView);
             holder.TXTsoluong.setText(String.valueOf(ChitietsanphamActivity.quantity));
-            holder.BTNtang.setOnClickListener(new View.OnClickListener() {
+            holder.setListener(new IImageclicklistener() {
                 @Override
-                public void onClick(View view) {
-                    int soluong = Integer.parseInt(holder.TXTsoluong.getText().toString());
-                    if (soluong < detail.getCountInStock().intValue()) {
-                        soluong = soluong + 1;
-                        holder.TXTsoluong.setText(String.valueOf(soluong));
+                public void onImageclick(View view, int pos, int giatri) {
+                    if(giatri==1) {
+                        if (Cartlist.get(pos).getSoluong() > 1) {
+                            int soluongmoi = Cartlist.get(pos).getSoluong() - 1;
+                            Cartlist.get(pos).setSoluong(soluongmoi);
+                        }
+                    } else if (giatri==2) {
+                        if (Cartlist.get(pos).getSoluong() <Cartlist.get(pos).getDetail().getCountInStock().intValue()) {
+                            int soluongmoi = Cartlist.get(pos).getSoluong() + 1;
+                            Cartlist.get(pos).setSoluong(soluongmoi);
+                        }
                     }
-                }
-            });
-            holder.BTNgiam.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int soluong = Integer.parseInt(holder.TXTsoluong.getText().toString());
-                    if (soluong > 1) {
-                        soluong = soluong - 1;
-                        holder.TXTsoluong.setText(String.valueOf(soluong));
-                    }
+                    holder.TXTsoluong.setText(String.valueOf(Cartlist.get(pos).getSoluong()));
+                    EventBus.getDefault().postSticky(new TinhTongevent());
                 }
             });
         }
@@ -86,11 +88,12 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
         else
         return Cartlist.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView TXTname,TXTprice,TXTsoluong;
         ImageButton BTNtang,BTNgiam;
         ImageView imageView;
         CheckBox checkBox;
+        IImageclicklistener listener;
         public ViewHolder(View itemView) {
             super(itemView);
             TXTname = itemView.findViewById(R.id.txttensp);
@@ -100,9 +103,20 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             BTNtang = itemView.findViewById(R.id.btn_increase);
             imageView = itemView.findViewById(R.id.hinhanh);
             checkBox = itemView.findViewById(R.id.checkBox);
-            itemView.setOnClickListener(view -> {
-                checkBox.setChecked(!checkBox.isChecked());
-            });
+            BTNtang.setOnClickListener(this);
+            BTNgiam.setOnClickListener(this);
+        }
+        public void setListener(IImageclicklistener listener){
+            this.listener = listener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view==BTNgiam){
+                listener.onImageclick(view,getAdapterPosition(),1);
+            } else if (view==BTNtang) {
+                listener.onImageclick(view,getAdapterPosition(),2);
+            }
         }
     }
 

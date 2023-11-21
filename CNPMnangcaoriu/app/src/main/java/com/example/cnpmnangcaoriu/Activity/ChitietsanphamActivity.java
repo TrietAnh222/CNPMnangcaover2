@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class ChitietsanphamActivity extends AppCompatActivity {
     DetailTest detailTest;
     private String id;
-    public static int quantity;
+    public static int quantity = 1;
     TextView detail_name,Rating,detail_description,detail_price,detail_quantity;
     Button BTN_giohang,BTN_muangay;
     ImageView imgviewchitiet,BTNtang,BTNgiam;
@@ -79,6 +79,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
                 quantity = Integer.parseInt(detail_quantity.getText().toString());
                 if(quantity<detailTest.getDetail().getCountInStock().intValue()) {
                     quantity = quantity + 1;
+                    detailTest.setSoluong(quantity);
                     detail_quantity.setText(String.valueOf(quantity));
                 }
             }
@@ -89,6 +90,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
                 quantity = Integer.parseInt(detail_quantity.getText().toString());
                 if(quantity>1) {
                     quantity = quantity - 1;
+                    detailTest.setSoluong(quantity);
                     detail_quantity.setText(String.valueOf(quantity));
                 }
             }
@@ -102,6 +104,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
                     public void onResponse(Call<DetailTest> call, Response<DetailTest> response) {
                         if(response.isSuccessful()){
                             detailTest = response.body();
+                            detailTest.setSoluong(quantity);
                             MainActivity.giohang.add(detailTest);
                             quantity = 1;
                             //phần sau làm tiếp
