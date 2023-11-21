@@ -28,6 +28,7 @@ LoginActivity extends AppCompatActivity {
     private TextView edtTaotaikhoan;
     private Button btnLogin;
     private LinearLayout layoutRegister;
+    public static String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ LoginActivity extends AppCompatActivity {
                         LogInResponse logInResponse = response.body();
                         if(response.isSuccessful()&& "OK".equals(logInResponse.getStatus()))
                         {
+                            id = logInResponse.getId();
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

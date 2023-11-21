@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "call fail", Toast.LENGTH_SHORT).show();
             }
         });
+        Log.e("TAG","id"+ LoginActivity.id);
         KhaiBao();
         ActionBar();
         ActionViewFilpper();

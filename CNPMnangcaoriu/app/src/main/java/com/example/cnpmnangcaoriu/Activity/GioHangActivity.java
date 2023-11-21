@@ -3,6 +3,8 @@ package com.example.cnpmnangcaoriu.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class GioHangActivity extends AppCompatActivity {
     RecyclerView rcbill;
     TextView txttongcong;
     Cartadapter cartadapter;
+    Button thanhtoan;
     int giatritongcong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,20 @@ public class GioHangActivity extends AppCompatActivity {
         cartadapter = new Cartadapter(MainActivity.giohang, GioHangActivity.this);
         rcbill.setAdapter(cartadapter);
         txttongcong = findViewById(R.id.txt_amount);
+        thanhtoan = findViewById(R.id.btnthanhtoan);
+        thanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(MainActivity.giohang!=null&&LoginActivity.id!=null){
+                    Intent intent = new Intent(GioHangActivity.this,TTgiaohangActivity.class);
+                    startActivity(intent);
+                }else if (MainActivity.giohang==null){
+                    Toast.makeText(GioHangActivity.this, "Thêm sản phẩm vào giỏ", Toast.LENGTH_SHORT).show();
+                }else if (LoginActivity.id==null){
+                    Toast.makeText(GioHangActivity.this, "Đăng nhập trước khi thanh toán", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

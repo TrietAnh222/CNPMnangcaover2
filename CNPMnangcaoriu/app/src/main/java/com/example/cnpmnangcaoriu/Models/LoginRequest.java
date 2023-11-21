@@ -3,6 +3,7 @@ package com.example.cnpmnangcaoriu.Models;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginRequest {
+
     @SerializedName("email")
     private String email;
     @SerializedName("password")
@@ -12,6 +13,8 @@ public class LoginRequest {
         this.email = email;
         this.password = password;
     }
+
+
 
     public String getEmail() {
         return email;

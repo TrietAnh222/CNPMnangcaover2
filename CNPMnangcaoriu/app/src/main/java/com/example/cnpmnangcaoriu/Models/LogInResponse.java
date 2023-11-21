@@ -3,15 +3,17 @@ package com.example.cnpmnangcaoriu.Models;
 import com.google.gson.annotations.SerializedName;
 
 public class LogInResponse {
+
     @SerializedName("status")
     private String status;
     @SerializedName("message")
     private String message;
+    @SerializedName("id")
+    private String id;
     @SerializedName("access_token")
     private String accesstoken;
     @SerializedName( "refresh_token")
     private String refreshtoken;
-
     public String getMessage() {
         return message;
     }
@@ -26,6 +28,14 @@ public class LogInResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAccesstoken() {

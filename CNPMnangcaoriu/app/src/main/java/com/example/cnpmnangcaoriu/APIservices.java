@@ -7,6 +7,7 @@ import com.example.cnpmnangcaoriu.Models.LoginRequest;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.Models.RegisterRequest;
 import com.example.cnpmnangcaoriu.Models.ResigterResponse;
+import com.example.cnpmnangcaoriu.Models.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,4 +37,6 @@ public interface APIservices {
     Call<ResigterResponse> register (@Body RegisterRequest registerRequest);
     @GET("/api/product/get-details/{id}")
     Call<DetailTest> getDetails(@Path("id") String id);
+    @GET("/api/user/get-details/{id}")
+    Call<UserModel> getDetailsUser(@Path("id") String id);
 }
