@@ -2,6 +2,7 @@ package com.example.cnpmnangcaoriu.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,9 +26,9 @@ import retrofit2.Response;
 public class TTgiaohangActivity extends AppCompatActivity {
     EditText editname,editcity,editphone,editaddress;
     Button btncancel,btnok;
-    OrderRequest orderRequest;
-    String paymentmethod = "";
+    String paymentmethod = "later_money";
     UserModel userModel;
+    OrderRequest orderRequest;
     String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +56,29 @@ public class TTgiaohangActivity extends AppCompatActivity {
             }
         });
         initui();
-        xulydonhang();
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                orderRequest = xulydonhang();
                 Call<OrderResponse> callOrder = APIservices.myapi.createOrder(orderRequest,LoginActivity.id);
                 callOrder.enqueue(new Callback<OrderResponse>() {
                     @Override
                     public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
-                        OrderResponse orderResponse= response.body();
-                        if(response.isSuccessful()&& "OK".equals(orderResponse.getStatus())){
+                        OrderResponse orderResponse = response.body();
+                        if(response.isSuccessful()&&"OK".equals(orderResponse.getStatus())){
                             Toast.makeText(TTgiaohangActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(TTgiaohangActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            MainActivity.giohang.clear();
                         }
-                        else{
-                            Toast.makeText(TTgiaohangActivity.this, orderResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(TTgiaohangActivity.this,"call fail", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<OrderResponse> call, Throwable t) {
+
                     }
                 });
             }
@@ -87,33 +93,37 @@ public class TTgiaohangActivity extends AppCompatActivity {
         btncancel = findViewById(R.id.btncancel);
         btnok = findViewById(R.id.BTNok);
     }
-    private void xulydonhang(){
+    private OrderRequest xulydonhang(){
         orderRequest = new OrderRequest();
-        List<OrderRequest.Orderproduct> list = new ArrayList<>();
         if(MainActivity.giohang!=null){
-            for(int i=0;i<MainActivity.giohang.size();i++){
-                OrderRequest.Orderproduct orderproduct = new OrderRequest.Orderproduct();
-                orderproduct.setAmount(MainActivity.giohang.get(i).getSoluong());
-                orderproduct.setName(MainActivity.giohang.get(i).getDetail().getName());
-                orderproduct.setImage(MainActivity.giohang.get(i).getDetail().getImage());
-                orderproduct.setPrice(MainActivity.giohang.get(i).getDetail().getPrice().intValue());
-                orderproduct.setDiscount(MainActivity.giohang.get(i).getDetail().getDiscount().intValue());
-                orderproduct.setProductid(MainActivity.giohang.get(i).getDetail().getId());
-                list.add(orderproduct);
+            try {
+                List<OrderRequest.Orderproduct> list = new ArrayList<>();
+                for (int i = 0; i < MainActivity.giohang.size(); i++) {
+                    OrderRequest.Orderproduct orderproduct = new OrderRequest.Orderproduct();
+                    orderproduct.setAmount(MainActivity.giohang.get(i).getSoluong().intValue());
+                    orderproduct.setName(MainActivity.giohang.get(i).getDetail().getName());
+                    orderproduct.setImage(MainActivity.giohang.get(i).getDetail().getImage());
+                    orderproduct.setPrice(MainActivity.giohang.get(i).getDetail().getPrice().intValue());
+                    orderproduct.setDiscount(MainActivity.giohang.get(i).getDetail().getDiscount().intValue());
+                    orderproduct.setProductid(MainActivity.giohang.get(i).getDetail().getId());
+                    list.add(orderproduct);
+                }
+                orderRequest.setOrderItems(list);
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
-        orderRequest.setOrderItems(list);
         orderRequest.setPaymentMethod(paymentmethod);
         orderRequest.setItemsPrice(GioHangActivity.giatritongcong);
         orderRequest.setShippingPrice(10000);
-        orderRequest.setTotalPrice(GioHangActivity.giatritongcong+orderRequest.getShippingPrice());
+        orderRequest.setTotalPrice((GioHangActivity.giatritongcong+orderRequest.getShippingPrice().intValue()));
         orderRequest.setFullname(editname.getText().toString());
         orderRequest.setCity(editcity.getText().toString());
         orderRequest.setIduser(LoginActivity.id);
+        orderRequest.setAddress(editaddress.getText().toString());
+        orderRequest.setPhone(Integer.parseInt(editphone.getText().toString()));
         orderRequest.setPaid(false);
-        if (orderRequest.isPaid()==false){
-            orderRequest.setPaidAt("");
-        }
         orderRequest.setEmail(email);
+        return orderRequest;
     }
 }

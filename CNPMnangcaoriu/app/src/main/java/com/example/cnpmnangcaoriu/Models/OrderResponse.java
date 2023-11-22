@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class OrderResponse {
     @SerializedName("status")
     private String status;
-    @SerializedName( "message")
+    @SerializedName("message")
     private String message;
 
     public String getStatus() {

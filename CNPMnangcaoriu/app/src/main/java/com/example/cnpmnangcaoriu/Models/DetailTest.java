@@ -6,7 +6,7 @@ public class DetailTest {
     @SerializedName("data")
     private ProductDetail detail;
     private boolean ischecked;
-    private int soluong;
+    private Number soluong;
 
     public boolean Ischecked() {
         return ischecked;
@@ -16,11 +16,15 @@ public class DetailTest {
         this.ischecked = ischecked;
     }
 
-    public int getSoluong() {
+    public boolean isIschecked() {
+        return ischecked;
+    }
+
+    public Number getSoluong() {
         return soluong;
     }
 
-    public void setSoluong(int soluong) {
+    public void setSoluong(Number soluong) {
         this.soluong = soluong;
     }
 

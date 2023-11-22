@@ -83,7 +83,7 @@ public class GioHangActivity extends AppCompatActivity {
         giatritongcong=0;
         if(event!=null){
             for(int i=0 ; i<MainActivity.giohang.size();i++) {
-                giatritongcong = MainActivity.giohang.get(i).getDetail().getPrice().intValue() * MainActivity.giohang.get(i).getSoluong() + giatritongcong;
+                giatritongcong = MainActivity.giohang.get(i).getDetail().getPrice().intValue() * MainActivity.giohang.get(i).getSoluong().intValue() + giatritongcong;
                 txttongcong.setText(String.valueOf(giatritongcong-(10*giatritongcong/100)));
             }
             giatritongcong = giatritongcong - (10*giatritongcong/100);

@@ -10,17 +10,19 @@ public class OrderRequest {
     @SerializedName("paymentMethod")
     private String paymentMethod;
     @SerializedName("itemsPrice")
-    private int itemsPrice;
+    private Number itemsPrice;
     @SerializedName("shippingPrice")
-    private int shippingPrice;
+    private Number shippingPrice;
     @SerializedName("totalPrice")
-    private int totalPrice;
+    private Number totalPrice;
     @SerializedName("fullName")
     private String fullname;
     @SerializedName("address")
     private String address;
     @SerializedName("city")
     private String city;
+    @SerializedName("phone")
+    private Number phone;
     @SerializedName("user")
     private String iduser;
     @SerializedName("isPaid")
@@ -31,11 +33,22 @@ public class OrderRequest {
     @SerializedName("email")
     private String email;
     public static class Orderproduct{
+        @SerializedName("name")
         private String name;
-        private int amount;
+
+        @SerializedName("amount")
+        private Number amount;
+
+        @SerializedName("image")
         private String image;
-        private int price;
-        private int discount;
+
+        @SerializedName("price")
+        private Number price;
+
+        @SerializedName("discount")
+        private Number discount;
+
+        @SerializedName("product")
         private String productid;
 
         //constructor
@@ -50,11 +63,11 @@ public class OrderRequest {
             this.name = name;
         }
 
-        public int getAmount() {
+        public Number getAmount() {
             return amount;
         }
 
-        public void setAmount(int amount) {
+        public void setAmount(Number amount) {
             this.amount = amount;
         }
 
@@ -66,19 +79,19 @@ public class OrderRequest {
             this.image = image;
         }
 
-        public int getPrice() {
+        public Number getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(Number price) {
             this.price = price;
         }
 
-        public int getDiscount() {
+        public Number getDiscount() {
             return discount;
         }
 
-        public void setDiscount(int discount) {
+        public void setDiscount(Number discount) {
             this.discount = discount;
         }
 
@@ -98,9 +111,18 @@ public class OrderRequest {
         return orderItems;
     }
 
+    public Number getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Number phone) {
+        this.phone = phone;
+    }
+
     public void setOrderItems(List<Orderproduct> orderItems) {
         this.orderItems = orderItems;
     }
+
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -109,27 +131,27 @@ public class OrderRequest {
         this.paymentMethod = paymentMethod;
     }
 
-    public int getItemsPrice() {
+    public Number getItemsPrice() {
         return itemsPrice;
     }
 
-    public void setItemsPrice(int itemsPrice) {
+    public void setItemsPrice(Number itemsPrice) {
         this.itemsPrice = itemsPrice;
     }
 
-    public int getShippingPrice() {
+    public Number getShippingPrice() {
         return shippingPrice;
     }
 
-    public void setShippingPrice(int shippingPrice) {
+    public void setShippingPrice(Number shippingPrice) {
         this.shippingPrice = shippingPrice;
     }
 
-    public int getTotalPrice() {
+    public Number getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(Number totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -165,6 +187,14 @@ public class OrderRequest {
         this.iduser = iduser;
     }
 
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
     public String getPaidAt() {
         return paidAt;
     }
@@ -180,13 +210,4 @@ public class OrderRequest {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public boolean isPaid() {
-        return isPaid;
-    }
-
-    public void setPaid(boolean paid) {
-        isPaid = paid;
-    }
-
 }

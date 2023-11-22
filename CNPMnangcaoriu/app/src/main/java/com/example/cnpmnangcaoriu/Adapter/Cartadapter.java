@@ -58,18 +58,18 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
             holder.TXTname.setText(detail.getName());
             holder.TXTprice.setText(detail.getPrice().toString());
             Glide.with(context).load(detail.getImage()).into(holder.imageView);
-            holder.TXTsoluong.setText(String.valueOf(ChitietsanphamActivity.quantity));
+            holder.TXTsoluong.setText(String.valueOf(Cartlist.get(position).getSoluong().intValue()));
             holder.setListener(new IImageclicklistener() {
                 @Override
                 public void onImageclick(View view, int pos, int giatri) {
                     if(giatri==1) {
-                        if (Cartlist.get(pos).getSoluong() > 1) {
-                            int soluongmoi = Cartlist.get(pos).getSoluong() - 1;
+                        if (Cartlist.get(pos).getSoluong().intValue() > 1) {
+                            int soluongmoi = Cartlist.get(pos).getSoluong().intValue() - 1;
                             Cartlist.get(pos).setSoluong(soluongmoi);
                         }
                     } else if (giatri==2) {
-                        if (Cartlist.get(pos).getSoluong() <Cartlist.get(pos).getDetail().getCountInStock().intValue()) {
-                            int soluongmoi = Cartlist.get(pos).getSoluong() + 1;
+                        if (Cartlist.get(pos).getSoluong().intValue() <Cartlist.get(pos).getDetail().getCountInStock().intValue()) {
+                            int soluongmoi = Cartlist.get(pos).getSoluong().intValue() + 1;
                             Cartlist.get(pos).setSoluong(soluongmoi);
                         }
                     }
