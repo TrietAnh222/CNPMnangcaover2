@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<DetailTest> giohang;
 
     private static final int FRAGMENT_HOME = 0;
-    private static final int FRAGMENT_CATEGORY = 1;
+    private static final int TTnguoidung = 1;
     private static final int FRAGMENT_HISTORY = 2;
     private static final int FRAGMENT_OTHER = 3;
     private int mCurrentFragment = FRAGMENT_HOME;
@@ -145,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mCurrentFragment = FRAGMENT_HOME;
             }
         } else if (id==R.id.nav_category) {
-            if (mCurrentFragment != FRAGMENT_CATEGORY) {
-                replaceFragment(new CategoryFragment());
-                mCurrentFragment = FRAGMENT_CATEGORY;
+            if (mCurrentFragment != TTnguoidung) {
+               Intent intent = new Intent(MainActivity.this,TTnguoidungActivity.class);
+               startActivity(intent);
             }
         } else if (id==R.id.nav_history) {
             if (mCurrentFragment != FRAGMENT_HISTORY) {
@@ -163,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-            //call giỏ hàng bị fail
         } else if (id == R.id.btnGioHang) {
             // Mở GioHangActivity khi nhấn vào "Giỏ hàng"
             Intent gioHangIntent = new Intent(MainActivity.this, GioHangActivity.class);
