@@ -24,6 +24,7 @@ import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.Eventbus.TinhTongevent;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
+import com.example.cnpmnangcaoriu.SwipeToDeleteListener;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -32,7 +33,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
+public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> implements SwipeToDeleteListener {
   private ArrayList<DetailTest> Cartlist;
   private Context context;
 
@@ -87,6 +88,10 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
         }
         else
         return 0;
+    }
+    public void onSwipe(int position) {
+        Cartlist.remove(position);
+        notifyDataSetChanged();
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView TXTname,TXTprice,TXTsoluong;

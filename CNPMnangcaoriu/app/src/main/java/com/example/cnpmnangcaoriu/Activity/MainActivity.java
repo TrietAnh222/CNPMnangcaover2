@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -43,7 +45,8 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+    EditText edtTimkiem;
+    ImageView Btntimkiem;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerViewManHinhChinh;
@@ -134,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(giohang==null){
             giohang = new ArrayList<>();
         }
+        edtTimkiem = findViewById(R.id.edttimkiem);
+        Btntimkiem = findViewById(R.id.btnTimkiem);
     }
 
     @Override

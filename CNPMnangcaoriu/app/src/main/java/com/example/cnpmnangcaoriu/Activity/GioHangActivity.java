@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.Eventbus.TinhTongevent;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.R;
+import com.example.cnpmnangcaoriu.SwipeToDeleteCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,6 +53,8 @@ public class GioHangActivity extends AppCompatActivity {
         rcbill.setAdapter(cartadapter);
         txttongcong = findViewById(R.id.txt_amount);
         txttongcong.setText(String.valueOf(giatritongcong));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(cartadapter));
+        itemTouchHelper.attachToRecyclerView(rcbill);
         thanhtoan = findViewById(R.id.btnthanhtoan);
         thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,6 +30,7 @@ LoginActivity extends AppCompatActivity {
     private LinearLayout layoutRegister;
     public static String id;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,8 @@ LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void xulydangnhap(){
 
     }
 }

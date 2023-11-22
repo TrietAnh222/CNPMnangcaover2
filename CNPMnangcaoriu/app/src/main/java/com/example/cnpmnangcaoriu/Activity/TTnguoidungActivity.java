@@ -58,7 +58,6 @@ public class TTnguoidungActivity extends AppCompatActivity {
                             Toast.makeText(TTnguoidungActivity.this, "cập nhật thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<UpdateuserResponse> call, Throwable t) {
 
