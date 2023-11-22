@@ -34,7 +34,7 @@ public class GioHangActivity extends AppCompatActivity {
     TextView txttongcong;
     Cartadapter cartadapter;
     Button thanhtoan;
-    int giatritongcong;
+    public static int giatritongcong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +50,7 @@ public class GioHangActivity extends AppCompatActivity {
         cartadapter = new Cartadapter(MainActivity.giohang, GioHangActivity.this);
         rcbill.setAdapter(cartadapter);
         txttongcong = findViewById(R.id.txt_amount);
+        txttongcong.setText(String.valueOf(giatritongcong));
         thanhtoan = findViewById(R.id.btnthanhtoan);
         thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +84,9 @@ public class GioHangActivity extends AppCompatActivity {
         if(event!=null){
             for(int i=0 ; i<MainActivity.giohang.size();i++) {
                 giatritongcong = MainActivity.giohang.get(i).getDetail().getPrice().intValue() * MainActivity.giohang.get(i).getSoluong() + giatritongcong;
-                txttongcong.setText(String.valueOf(giatritongcong));
+                txttongcong.setText(String.valueOf(giatritongcong-(10*giatritongcong/100)));
             }
+            giatritongcong = giatritongcong - (10*giatritongcong/100);
         }
     }
 }

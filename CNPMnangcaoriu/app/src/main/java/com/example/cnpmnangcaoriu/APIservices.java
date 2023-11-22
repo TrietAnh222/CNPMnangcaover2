@@ -4,6 +4,8 @@ package com.example.cnpmnangcaoriu;
 import com.example.cnpmnangcaoriu.Models.DetailTest;
 import com.example.cnpmnangcaoriu.Models.LogInResponse;
 import com.example.cnpmnangcaoriu.Models.LoginRequest;
+import com.example.cnpmnangcaoriu.Models.OrderRequest;
+import com.example.cnpmnangcaoriu.Models.OrderResponse;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.Models.RegisterRequest;
 import com.example.cnpmnangcaoriu.Models.ResigterResponse;
@@ -39,4 +41,7 @@ public interface APIservices {
     Call<DetailTest> getDetails(@Path("id") String id);
     @GET("/api/user/get-details/{id}")
     Call<UserModel> getDetailsUser(@Path("id") String id);
+    @POST("/api/order/create/{id}")
+    Call<OrderResponse> createOrder(@Body OrderRequest orderRequest,
+                                    @Path("id") String id);
 }
