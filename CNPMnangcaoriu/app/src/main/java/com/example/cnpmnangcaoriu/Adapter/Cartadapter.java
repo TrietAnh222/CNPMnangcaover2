@@ -82,11 +82,11 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if(Cartlist==null){
-            return 0;
+        if(Cartlist!=null){
+            return Cartlist.size();
         }
         else
-        return Cartlist.size();
+        return 0;
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView TXTname,TXTprice,TXTsoluong;

@@ -9,10 +9,22 @@
     android:gravity="center"
     tools:context=".Activity.LoginActivity">
 
+    <TextView
+        android:id="@+id/buttonBacktangchu"
+        android:layout_width="49dp"
+        android:layout_height="36dp"
+        android:layout_marginRight="160dp"
+        android:layout_marginBottom="130dp"
+        android:background="@drawable/baseline_arrow_back_24" />
+
+
+
+
     <ImageView
         android:layout_width="400dp"
         android:layout_height="200dp"
         android:src="@drawable/logophone"/>
+
     <EditText
         android:id="@+id/edtLoginEmail"
         android:layout_width="match_parent"
@@ -65,4 +77,5 @@
             android:textColor="#2196F3"
             android:textSize="15sp" />
     </LinearLayout>
+
 </LinearLayout>

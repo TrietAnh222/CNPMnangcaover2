@@ -9,6 +9,8 @@ import com.example.cnpmnangcaoriu.Models.OrderResponse;
 import com.example.cnpmnangcaoriu.Models.ProductModel;
 import com.example.cnpmnangcaoriu.Models.RegisterRequest;
 import com.example.cnpmnangcaoriu.Models.ResigterResponse;
+import com.example.cnpmnangcaoriu.Models.UpdateuserRequest;
+import com.example.cnpmnangcaoriu.Models.UpdateuserResponse;
 import com.example.cnpmnangcaoriu.Models.UserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface APIservices {
@@ -44,4 +47,7 @@ public interface APIservices {
     @POST("/api/order/create/{id}")
     Call<OrderResponse> createOrder(@Body OrderRequest orderRequest,
                                     @Path("id") String id);
+    @PUT("/api/user/update-user/{id}")
+    Call<UpdateuserResponse> updateuser(@Body UpdateuserRequest updateuserRequest,
+                                        @Path("id") String id);
 }

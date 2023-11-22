@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cnpmnangcaoriu.APIservices;
@@ -25,7 +26,8 @@ import retrofit2.Response;
 
 public class TTgiaohangActivity extends AppCompatActivity {
     EditText editname,editcity,editphone,editaddress;
-    Button btncancel,btnok;
+    TextView btncancel;
+    Button btnok;
     String paymentmethod = "later_money";
     UserModel userModel;
     OrderRequest orderRequest;
@@ -86,11 +88,11 @@ public class TTgiaohangActivity extends AppCompatActivity {
     }
 
     private void initui(){
-        editname=findViewById(R.id.editName);
-        editcity = findViewById(R.id.editCity);
-        editaddress= findViewById(R.id.editAdress);
-        editphone = findViewById(R.id.editPhone);
-        btncancel = findViewById(R.id.btncancel);
+        editname=findViewById(R.id.editTextNamegh);
+        editcity = findViewById(R.id.editTextCitygh);
+        editaddress= findViewById(R.id.editTextAddressgh);
+        editphone = findViewById(R.id.editTextPhonegh);
+        btncancel = findViewById(R.id.buttonBackgh);
         btnok = findViewById(R.id.BTNok);
     }
     private OrderRequest xulydonhang(){

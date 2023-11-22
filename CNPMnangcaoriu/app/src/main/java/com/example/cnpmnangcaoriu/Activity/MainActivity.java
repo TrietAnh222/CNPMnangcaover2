@@ -146,8 +146,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (id==R.id.nav_category) {
             if (mCurrentFragment != TTnguoidung) {
-               Intent intent = new Intent(MainActivity.this,TTnguoidungActivity.class);
-               startActivity(intent);
+                if(LoginActivity.id!=null) {
+                    Intent intent = new Intent(MainActivity.this, TTnguoidungActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(this, "vui long đăng nhập", Toast.LENGTH_SHORT).show();
+                }
             }
         } else if (id==R.id.nav_history) {
             if (mCurrentFragment != FRAGMENT_HISTORY) {
@@ -160,9 +164,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mCurrentFragment = FRAGMENT_OTHER;
             }
         } else if (id==R.id.nav_login) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
         } else if (id == R.id.btnGioHang) {
             // Mở GioHangActivity khi nhấn vào "Giỏ hàng"
             Intent gioHangIntent = new Intent(MainActivity.this, GioHangActivity.class);

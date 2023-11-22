@@ -7,16 +7,26 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarcart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="#fd5555"
+        tools:ignore="MissingConstraints">
 
+        <ImageButton
+            android:id="@+id/btnBackcart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:background="#fd5555"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvBill"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btnthanhtoan"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbarcart" />
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
