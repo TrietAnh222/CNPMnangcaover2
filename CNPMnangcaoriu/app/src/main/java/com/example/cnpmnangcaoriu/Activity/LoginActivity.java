@@ -29,6 +29,7 @@ LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private LinearLayout layoutRegister;
     public static String id;
+     TextView btnbacktrangchu;
 
 
     @Override
@@ -44,12 +45,20 @@ LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         layoutRegister = findViewById(R.id.layout_sign_up);
         edtTaotaikhoan = findViewById(R.id.edtTaotaikhoan);
+         btnbacktrangchu = findViewById(R.id.buttonBacktrangchu);
     }
     private void initListener() {
         layoutRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+         btnbacktrangchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
