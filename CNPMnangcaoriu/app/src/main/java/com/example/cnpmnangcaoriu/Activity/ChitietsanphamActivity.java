@@ -29,6 +29,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
     TextView detail_name,Rating,detail_description,detail_price,detail_quantity;
     Button BTN_giohang,BTN_muangay;
     ImageView imgviewchitiet,BTNtang,BTNgiam;
+     ImageButton btnbackchitietsp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,18 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTNtang = findViewById(R.id.addItem);
         BTNgiam = findViewById(R.id.removeItem);
         detail_quantity = findViewById(R.id.quantity);
+         btnbackchitietsp = findViewById(R.id.btnBackchitiet);
     }
     //xử lý button
     private void XulyButton(){
+        
+         btnbackchitietsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChitietsanphamActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         BTNtang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
