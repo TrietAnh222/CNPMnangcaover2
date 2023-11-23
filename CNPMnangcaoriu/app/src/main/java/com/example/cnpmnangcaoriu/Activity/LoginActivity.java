@@ -45,7 +45,7 @@ LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         layoutRegister = findViewById(R.id.layout_sign_up);
         edtTaotaikhoan = findViewById(R.id.edtTaotaikhoan);
-         btnbacktrangchu = findViewById(R.id.buttonBacktrangchu);
+        btnbacktrangchu = findViewById(R.id.buttonBacktangchu);
     }
     private void initListener() {
         layoutRegister.setOnClickListener(new View.OnClickListener() {

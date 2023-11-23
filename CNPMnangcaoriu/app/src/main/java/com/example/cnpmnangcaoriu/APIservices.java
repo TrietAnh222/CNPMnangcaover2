@@ -30,7 +30,7 @@ public interface APIservices {
     //lưu ý tìm ip wifi của chính mình r gắn đuôi localhost vô mới chạy được nhen
     //vd: http://192.168.1.103:đuôi localhost http://192.168.1.12:3000/
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.1.103:3001/").addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://172.16.0.2:3001/").addConverterFactory(GsonConverterFactory.create())
             .build();
     // Khởi tạo Retrofit Service
     APIservices myapi= retrofit.create(APIservices.class);

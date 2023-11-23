@@ -27,9 +27,9 @@ public class ChitietsanphamActivity extends AppCompatActivity {
     private String id;
     public static int quantity = 1;
     TextView detail_name,Rating,detail_description,detail_price,detail_quantity;
-    Button BTN_giohang,BTN_muangay;
+    Button BTN_giohang;
     ImageView imgviewchitiet,BTNtang,BTNgiam;
-     ImageButton btnbackchitietsp;
+    ImageButton btnbackchitietsp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,6 @@ public class ChitietsanphamActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DetailTest> call, Throwable t) {
-
             }
         });
         KhaiBao();
@@ -71,11 +70,10 @@ public class ChitietsanphamActivity extends AppCompatActivity {
         BTNtang = findViewById(R.id.addItem);
         BTNgiam = findViewById(R.id.removeItem);
         detail_quantity = findViewById(R.id.quantity);
-         btnbackchitietsp = findViewById(R.id.btnBackchitiet);
+        btnbackchitietsp = findViewById(R.id.btnBack);
     }
     //xử lý button
     private void XulyButton(){
-        
          btnbackchitietsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +116,7 @@ public class ChitietsanphamActivity extends AppCompatActivity {
                             MainActivity.giohang.add(detailTest);
                             quantity = 1;
                             //phần sau làm tiếp
-                            Intent intentdetail = new Intent(ChitietsanphamActivity.this , MainActivity.class);
+                            Intent intentdetail = new Intent(ChitietsanphamActivity.this , GioHangActivity.class);
                             intentdetail.putExtra("quantity" , detail_quantity.getText());
                             startActivity(intentdetail);
                         }

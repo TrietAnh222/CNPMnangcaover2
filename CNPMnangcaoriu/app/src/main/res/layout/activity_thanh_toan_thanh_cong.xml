@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ThanhToanThanhCong">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/baseline_check_circle_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đặt hàng thành công!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FF5722"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Các TextView khác để hiển thị thông tin đơn hàng -->
+        <!-- Ví dụ: tên sản phẩm, số lượng, tổng giá tiền, v.v. -->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay lại"
+            android:textStyle="bold"
+            android:textColor="#131313"
+            android:backgroundTint="#2196F3"
+            android:id="@+id/btnBackToHome"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

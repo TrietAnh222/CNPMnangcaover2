@@ -107,7 +107,6 @@ public class Cartadapter extends RecyclerView.Adapter<Cartadapter.ViewHolder> im
             BTNgiam = itemView.findViewById(R.id.btnback);
             BTNtang = itemView.findViewById(R.id.btn_increase);
             imageView = itemView.findViewById(R.id.hinhanh);
-            checkBox = itemView.findViewById(R.id.checkBox);
             BTNtang.setOnClickListener(this);
             BTNgiam.setOnClickListener(this);
         }

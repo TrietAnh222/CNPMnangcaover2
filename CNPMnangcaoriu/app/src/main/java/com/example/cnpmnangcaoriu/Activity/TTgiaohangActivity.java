@@ -68,8 +68,7 @@ public class TTgiaohangActivity extends AppCompatActivity {
                     public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                         OrderResponse orderResponse = response.body();
                         if(response.isSuccessful()&&"OK".equals(orderResponse.getStatus())){
-                            Toast.makeText(TTgiaohangActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(TTgiaohangActivity.this,MainActivity.class);
+                            Intent intent = new Intent(TTgiaohangActivity.this,ThanhToanThanhCong.class);
                             startActivity(intent);
                             MainActivity.giohang.clear();
                         }

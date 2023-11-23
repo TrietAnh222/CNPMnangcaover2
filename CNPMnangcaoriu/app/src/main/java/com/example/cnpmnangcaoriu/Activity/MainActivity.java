@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -45,13 +46,14 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    EditText edtTimkiem;
-    ImageView Btntimkiem;
+    List<ProductModel.Product> productList;
+    ProductModel loclist;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerViewManHinhChinh;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
+    TextView txtiphone,txtsamsung,txtxiaomi;
     public static ArrayList<DetailTest> giohang;
 
     private static final int FRAGMENT_HOME = 0;
@@ -67,13 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         // Thực hiện cuộc gọi API
         Call<ProductModel> call = APIservices.myapi.Getdata();
-        //đã gọi dc thành công nhưng response bị rỗng nên không chạy dc ae tìm hiểu giúp tui
         call.enqueue(new Callback<ProductModel>() {
             @Override
             public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
                 if (response != null && response.isSuccessful() && response.body() != null) {
-                    ProductModel productModel= response.body();
-                    ProductAdapter productAdapter = new ProductAdapter(productModel, MainActivity.this);
+                    loclist= response.body();
+                    ProductAdapter productAdapter = new ProductAdapter(loclist, MainActivity.this);
                     recyclerViewManHinhChinh.setAdapter(productAdapter);
                 } else {
                     int errorcode =response.code();
@@ -91,6 +92,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         KhaiBao();
         ActionBar();
         ActionViewFilpper();
+        txtiphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Xulyloc("Apple");
+            }
+        });
+        txtxiaomi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Xulyloc("Xiaomi");
+            }
+        });
+        txtsamsung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Xulyloc("SamSung");
+            }
+        });
     }
     //chi tiết về glide Ae có thể tham khảo ở đây
     //https://github.com/bumptech/glide/blob/master/README.md
@@ -137,8 +156,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(giohang==null){
             giohang = new ArrayList<>();
         }
-        edtTimkiem = findViewById(R.id.edttimkiem);
-        Btntimkiem = findViewById(R.id.btnTimkiem);
+        txtiphone = findViewById(R.id.TXTiphone);
+        txtsamsung = findViewById(R.id.TXTsamsung);
+        txtxiaomi = findViewById(R.id.TXTxiaomi);
     }
 
     @Override
@@ -176,8 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent gioHangIntent = new Intent(MainActivity.this, GioHangActivity.class);
             startActivity(gioHangIntent);
         }
-
-
         return true;
     }
 
@@ -186,5 +204,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.replace(R.id.RecyclerView,fragment);
         transaction.commit();
     }
+    private void Xulyloc(String thucanloc){
+        Call<ProductModel> call = APIservices.myapi.Getdata();
+        call.enqueue(new Callback<ProductModel>() {
+            @Override
+            public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                if (response != null && response.isSuccessful() && response.body() != null) {
+                    loclist= response.body();
+                    List<ProductModel.Product> productList = loclist.getData();
+                    List<ProductModel.Product> filteredList = new ArrayList<>();
+                    for (ProductModel.Product product : productList) {
+                        if (thucanloc.equals(product.getType().toString())) {
+                            filteredList.add(product);
+                        }
+                    }
+                    if(filteredList!=null) {
+                        ProductAdapter productAdapter = new ProductAdapter(new ProductModel(filteredList), MainActivity.this);
+                        recyclerViewManHinhChinh.setAdapter(productAdapter);
+                    }
+                } else {
+                    int errorcode =response.code();
+                    Log.e("APIerror" , "Error code" + errorcode);
+                    Toast.makeText(MainActivity.this, "Dữ liệu không hợp lệ hoặc rỗng", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ProductModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "call fail", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textColorPrimary">#F00000</color>
     <color name="colorPrimaryDark">#3A3939</color>
-
+    "<color name="colorPrimary">#3F51B5</color>"
 </resources>
