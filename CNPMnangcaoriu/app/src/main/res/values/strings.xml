@@ -5,7 +5,7 @@
     <string name="nav_history">Đăng xuất</string>
     <string name="nav_account">Tài khoản</string>
     <string name="nav_login">Đăng nhập</string>
-    <string name="nav_other">Xem thêm</string>
+    <string name="nav_other"></string>
 
     <string name="amount_to_be_paid">Tổng số lượng tiền:</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
