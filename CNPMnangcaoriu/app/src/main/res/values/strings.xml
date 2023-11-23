@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">DemoLT</string>
     <string name="nav_home">Trang chủ</string>
-    <string name="nav_category">Danh mục</string>
-    <string name="nav_history">Lịch sử</string>
+    <string name="nav_category">Thông tin tài khoản</string>
+    <string name="nav_history">Đăng xuất</string>
     <string name="nav_account">Tài khoản</string>
     <string name="nav_login">Đăng nhập</string>
     <string name="nav_other">Xem thêm</string>

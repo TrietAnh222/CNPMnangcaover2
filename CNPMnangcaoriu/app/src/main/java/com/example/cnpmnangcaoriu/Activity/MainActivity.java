@@ -180,8 +180,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (id==R.id.nav_history) {
             if (mCurrentFragment != FRAGMENT_HISTORY) {
-                replaceFragment(new HistoryFragment());
-                mCurrentFragment = FRAGMENT_HISTORY;
+                if(LoginActivity.id!=null) {
+                    giohang.clear();
+                    LoginActivity.id = null;
+                    Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Đăng xuất thất bại", Toast.LENGTH_SHORT).show();
+                }
             }
         } else if (id==R.id.nav_other) {
             if (mCurrentFragment != FRAGMENT_OTHER) {
