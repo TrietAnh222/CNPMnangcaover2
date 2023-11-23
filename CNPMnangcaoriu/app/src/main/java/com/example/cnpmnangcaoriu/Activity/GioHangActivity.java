@@ -36,6 +36,7 @@ public class GioHangActivity extends AppCompatActivity {
     TextView txttongcong;
     Cartadapter cartadapter;
     Button thanhtoan;
+    ImageButton btnbackcart;
     public static int giatritongcong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,16 @@ public class GioHangActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(cartadapter));
         itemTouchHelper.attachToRecyclerView(rcbill);
         thanhtoan = findViewById(R.id.btnthanhtoan);
+         btnbackcart = findViewById(R.id.btnBackcart);
+
+          btnbackcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GioHangActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        
         thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
